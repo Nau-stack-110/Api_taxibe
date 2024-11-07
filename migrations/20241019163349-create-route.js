@@ -17,14 +17,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull:false
       },
-      date_depart: {
-        type: Sequelize.DATEONLY,
-        allowNull:false
-      },
-      time_travel: {
-        type: Sequelize.TIME,
-        allowNull:false
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

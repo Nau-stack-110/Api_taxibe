@@ -12,8 +12,6 @@ module.exports = (sequelize, DataTypes) => {
   Route.init({
     depart_city: DataTypes.STRING,
     arrival_city: DataTypes.STRING,
-    date_depart: DataTypes.DATEONLY,
-    time_travel: DataTypes.TIME
   }, {
     sequelize,
     modelName: 'Route',

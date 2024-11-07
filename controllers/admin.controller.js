@@ -1,9 +1,5 @@
 const {User, Bookings, Payment, Route, TaxiBe} = require('../models');
 
-const createNewAdmin  = async (req, res) =>{
-
-}
-
 const getStats = async (req, res) =>{
     try {
         const userCount = await User.count();
@@ -73,13 +69,12 @@ const getUserById = async (req, res) =>{
     }
 }
 
-const updateUsers = async (req, res) =>{
+const changepassword = async (req, res) =>{
 
 }
 
 module.exports = {
-    createNewAdmin:createNewAdmin,
-    updateUsers:updateUsers,
+    changepassword:changepassword,
     deleteUser:deleteUser,
     getAllUsers:getAllUsers,
     updateMyProfile:updateMyProfile,
