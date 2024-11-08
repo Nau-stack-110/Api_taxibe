@@ -15,5 +15,4 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(mainRouter);
 
-
 module.exports = app;

@@ -1,10 +1,12 @@
 const express = require("express");
 const taxibeController = require("../controllers/taxibe.controller");
+const { CheckToken, CheckAdmin } = require("../middlewares/authorize");
 const router = express.Router();
-router.post('/', taxibeController.createTaxibe);
+router.post('/', [CheckToken, CheckAdmin], taxibeController.createTaxibe);
+router.delete('/:id', [CheckToken, CheckAdmin], taxibeController.deleteTaxiBeById);
+router.put('/:id', [CheckToken, CheckAdmin], taxibeController.updateTaxibe);
+
 router.get('/:id', taxibeController.getTaxibeById);
-router.put('/:id', taxibeController.updateTaxibe);
-router.delete('/:id', taxibeController.deleteTaxiBeById);
 router.get('/', taxibeController.getAllTaxibe);
 
 module.exports = router;

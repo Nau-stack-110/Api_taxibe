@@ -1,7 +1,7 @@
 {
   "name": "api_ticket_taxi_node",
   "version": "1.0.0",
-  "description": "API Taxi ticket reservation with node and mysql",
+  "description": "API Taxi ticket reservation with node sequelize-cli (ORM) and mysql",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

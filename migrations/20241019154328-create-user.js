@@ -33,6 +33,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull:false,
       },
+      resetPin:{
+        type:Sequelize.INTEGER,
+        allowNull:true,
+      },
+      pinExpiry:{
+        type:Sequelize.DATE,
+        allowNull:true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
