@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   
     static associate(models) {
       Route.hasMany(models.Bookings, {foreignKey:'route_id'});
+      Route.hasMany(models.Trajet, {foreignKey:'route_id'});
     }
   }
   Route.init({

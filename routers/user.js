@@ -7,7 +7,7 @@ router.get('/me',[ CheckToken, CheckUser], userController.getMyProfile );
 router.put('/me', [CheckToken, CheckUser], userController.updateMyProfile);
 
 router.delete('/me/delete', [CheckToken, CheckUser], userController.deleteMyProfile);
-router.put('/me/change', [CheckToken, CheckUser], userController.changepassword);
+router.put('/me/password/change', [CheckToken, CheckUser], userController.changepassword);
 
 
 module.exports = router;

@@ -7,13 +7,14 @@ const createTaxibe = async (req, res) =>{
         matricule:req.body.matricule,
         category:req.body.category,
         nb_total_place:req.body.nb_total_place
-    }
+    };
     try {
         const taxibe = await TaxiBe.create(cetaxibe);
         res.status(201).json(taxibe);
     } catch (e) {
         res.status(400).json({
-            e:'erreur lors de la création d\'un taxi'
+            message:'erreur lors de la création d\'un taxi',
+            error:e.message
         });
     }
 }

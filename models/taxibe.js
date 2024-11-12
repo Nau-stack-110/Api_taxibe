@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
  
     static associate(models) {
       TaxiBe.hasMany(models.Bookings, {foreignKey:'taxibe_id'});
+      TaxiBe.hasMany(models.Trajet, {foreignKey:'taxibe_id'});
     }
   }
   TaxiBe.init({

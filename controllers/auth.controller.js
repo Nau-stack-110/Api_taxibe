@@ -1,6 +1,7 @@
 const {Role, User} = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const createAdmin = async () =>{
     try {
         let adminRole = await Role.findOne({where: {rolename:'Admin'}});
@@ -29,6 +30,7 @@ const createAdmin = async () =>{
         console.log('Erreur lors de la vérification/creation de l\'admin:', e.message || e);
     }
 }
+
 const register = async (req, res) =>{
     try {
         let userRole = await Role.findOne({where: {rolename:'User'}});
@@ -85,10 +87,6 @@ const login = async (req, res) =>{
     }
 }
 
-// const logout = async (res, req) =>{
-
-// }
-
 const forgotpassword = async (req, res) => {
     const email = req.body.email;
     try {
@@ -124,7 +122,6 @@ const resetpassword = async (req, res) => {
         }
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(newPassword, salt);
-
         user.password = hashedPassword;
         user.resetPin = null;
         user.pinExpiry = null;
@@ -138,13 +135,15 @@ const resetpassword = async (req, res) => {
     }
 };
 
+// const logout = async (res, req) =>{
 
+// }
 
 module.exports = {
     createAdmin,
     login, 
     register,
-    // logout,
     resetpassword,
-    forgotpassword
+    forgotpassword,
+    // logout,
 }

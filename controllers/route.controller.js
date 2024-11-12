@@ -7,7 +7,7 @@ const createRoute  = async (req, res) =>{
         res.status(201).json(route);
     } catch (e) {
         res.status(400).json({
-            mess:'erreur lors de la création d\'un route',
+            message:'erreur lors de la création d\'un route',
             error:e.message
         });
     }

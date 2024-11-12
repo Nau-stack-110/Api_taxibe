@@ -1,4 +1,5 @@
-const {User, Bookings, Payment, Route, TaxiBe} = require('../models');
+const {User, Bookings, Payment, Route, TaxiBe, Trajet} = require('../models');
+const bcryptjs = require('bcryptjs');
 
 const getStats = async (req, res) =>{
     try {
@@ -7,13 +8,15 @@ const getStats = async (req, res) =>{
         const taxibeCount = await TaxiBe.count();
         const routeCount = await Route.count();
         const paymentCount = await Payment.count();
+        const trajetCount = await Trajet.count();
         res.status(200).send({
             message :"voici les statistiques : ",
             users : userCount,
             routes : routeCount,
             taxibe :taxibeCount,
             Payment :paymentCount,
-            booking : bookingCount
+            booking : bookingCount,
+            trajet: trajetCount,
         });
     } catch (e) {
         res.status(500).json({
@@ -112,7 +115,7 @@ const changepassword = async (req, res) => {
         }
         const salt = await bcryptjs.genSalt(10); // hasher le mdp
         const hash = await bcryptjs.hash(new_password, salt);
-        user.password = hash; // mettre à jour le mdp
+        user.password = hash; 
         await user.save();
         res.status(200).send({ message: "Password changed successfully!" });
     } catch (error) {

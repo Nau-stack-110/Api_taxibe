@@ -7,6 +7,7 @@ const rideRouter = require("./route");
 const bookingRouter = require("./booking");
 const authRouter = require("./auth");
 const adminRouter = require("./admin");
+const trajetRouter = require("./trajet");
 // const paymentRouter = require("./payment");
 
 
@@ -16,6 +17,7 @@ mainRouter.use("/users", userRouter);
 mainRouter.use("/booking", bookingRouter);
 mainRouter.use("/taxibe", taxibeRouter);
 mainRouter.use("/route", rideRouter);
+mainRouter.use("/trajet", trajetRouter);
 // mainRouter.use("/payment", paymentRouter);
 
 
