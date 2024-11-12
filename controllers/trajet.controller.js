@@ -77,7 +77,7 @@ const getAllTrajet  = async (req, res) =>{
         res.status(200).send(trajet);
     } catch (e) {
         res.status(500).send({
-            message:'erreur lors de la récuperation des trajets', 
+            message:'erreur lors de la récuperation des trajets!', 
             error:e.message
         });
     }
