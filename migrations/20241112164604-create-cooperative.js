@@ -2,36 +2,32 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('TaxiBes', {
+    await queryInterface.createTable('Cooperatives', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      type: {
+      name: {
         type: Sequelize.STRING,
-        allowNull:false
-      },
-      cooperative_id:{
-        type: Sequelize.INTEGER,
         allowNull:false,
       },
-      imageTaxi: {
+      adresse: {
+        type: Sequelize.STRING,
+        allowNull:false,
+      },
+      bio: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      matricule: {
+      contact: {
         type: Sequelize.INTEGER,
         allowNull:false
       },
-      category: {
+      link_web: {
         type: Sequelize.STRING,
-        allowNull:false
-      },
-      nb_total_place: {
-        type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull:true
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('TaxiBes');
+    await queryInterface.dropTable('Cooperatives');
   }
 };

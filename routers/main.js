@@ -8,6 +8,7 @@ const bookingRouter = require("./booking");
 const authRouter = require("./auth");
 const adminRouter = require("./admin");
 const trajetRouter = require("./trajet");
+const cooperativeRouter = require('./cooperative');
 // const paymentRouter = require("./payment");
 
 
@@ -18,6 +19,7 @@ mainRouter.use("/booking", bookingRouter);
 mainRouter.use("/taxibe", taxibeRouter);
 mainRouter.use("/route", rideRouter);
 mainRouter.use("/trajet", trajetRouter);
+mainRouter.use("/cooperative", cooperativeRouter)
 // mainRouter.use("/payment", paymentRouter);
 
 

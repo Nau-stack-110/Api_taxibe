@@ -1,4 +1,4 @@
-const {Trajet, TaxiBe, Route} = require("../models");
+const {Trajet, TaxiBe, Route,} = require("../models");
 
 const createTrajet  = async (req, res) =>{
     const { taxibe_id, route_id, date, time, place_dispo} = req.body;
@@ -55,7 +55,7 @@ const deleteTrajet  = async (req, res) =>{
 const getTrajetById  = async (req, res) =>{
     const id = req.params.id;
     try {
-        const trajet = await Trajet.findByPk(id, {include:[Route, TaxiBe]});
+        const trajet = await Trajet.findByPk(id, {include:[TaxiBe, Route]});
         if(!trajet){
             res.status(404).json({
                 message:"Trajet not found !"

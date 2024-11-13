@@ -1,4 +1,4 @@
-const {TaxiBe} = require('../models');
+const {TaxiBe, Cooperative} = require('../models');
 
 const createTaxibe = async (req, res) =>{
     const cetaxibe = {
@@ -6,7 +6,8 @@ const createTaxibe = async (req, res) =>{
         imageTaxi:req.body.imageTaxi,
         matricule:req.body.matricule,
         category:req.body.category,
-        nb_total_place:req.body.nb_total_place
+        nb_total_place:req.body.nb_total_place,
+        cooperative_id:req.body.cooperative_id,
     };
     try {
         const taxibe = await TaxiBe.create(cetaxibe);
@@ -26,7 +27,8 @@ const updateTaxibe = async (req, res) =>{
         imageTaxi:req.body.imageTaxi,
         matricule:req.body.matricule,
         category:req.body.category,
-        nb_total_place:req.body.nb_total_place
+        nb_total_place:req.body.nb_total_place,
+        cooperative_id:req.body.cooperative_id,
     }
     try {
         const taxibe = await TaxiBe.update(updateTaxibe, {where :{id:id}});
@@ -69,7 +71,8 @@ const getAllTaxibe = async (req, res) =>{
         res.status(200).json(taxibe);
     } catch (e) {
         res.status(500).json({
-            e:'erreur lors de la récuperation des taxibe'
+            message:'erreur lors de la récuperation des taxibe',
+            error:e.message
         });
     }
 }
@@ -77,7 +80,7 @@ const getAllTaxibe = async (req, res) =>{
 const getTaxibeById = async (req, res) =>{
     const id = req.params.id;
     try {
-        const taxibe = await TaxiBe.findByPk(id);
+        const taxibe = await TaxiBe.findByPk(id, {include:[Cooperative]});
         if(!taxibe){
             res.status(404).json({
                 message:"Taxibe not found !"

@@ -1,5 +1,6 @@
-const {User, Bookings, Payment, Route, TaxiBe, Trajet} = require('../models');
+const {User, Bookings, Payment, Route, TaxiBe, Trajet, Cooperative} = require('../models');
 const bcryptjs = require('bcryptjs');
+const cooperative = require('../models/cooperative');
 
 const getStats = async (req, res) =>{
     try {
@@ -9,6 +10,7 @@ const getStats = async (req, res) =>{
         const routeCount = await Route.count();
         const paymentCount = await Payment.count();
         const trajetCount = await Trajet.count();
+        const coopCount = await Cooperative.count();
         res.status(200).send({
             message :"voici les statistiques : ",
             users : userCount,
@@ -17,6 +19,7 @@ const getStats = async (req, res) =>{
             Payment :paymentCount,
             booking : bookingCount,
             trajet: trajetCount,
+            cooperative:coopCount,
         });
     } catch (e) {
         res.status(500).json({
