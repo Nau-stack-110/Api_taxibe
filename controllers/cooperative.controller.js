@@ -1,9 +1,9 @@
-const {Cooperative} = require("../models");
+const {Cooperative, User} = require("../models");
 
 const createCoop  = async (req, res) =>{
-    const { name, adresse, bio, contact, link_web } = req.body;
+    const { name, adresse, bio, contact, link_web, admin } = req.body;
     try {
-        const coop = await Cooperative.create({name, adresse, bio, contact, link_web});
+        const coop = await Cooperative.create({name, adresse, bio, contact, link_web, admin});
         res.status(201).json(coop);
     } catch (e) {
         res.status(400).json({
@@ -56,7 +56,13 @@ const deleteCoop  = async (req, res) =>{
 const getcoopById  = async (req, res) =>{
     const id = req.params.id;
     try {
-        const coop = await Cooperative.findByPk(id);
+        const coop = await Cooperative.findByPk(id, { 
+            include:{
+                model:User,
+                attributes:['name', 'email', 'tel'],
+        },
+        attributes: ['name', 'contact', 'adresse', 'bio', 'link_web', 'createdAt'],
+    });
         if(!coop){
             res.status(404).json({
                 message:"Cooperative not found !"
@@ -74,7 +80,13 @@ const getcoopById  = async (req, res) =>{
 
 const getAllCooperative  = async (req, res) =>{
     try {
-        const coop = await Cooperative.findAll();
+        const coop = await Cooperative.findAll({
+            include:{
+                model:User,
+                attributes:['name', 'email', 'tel'],
+            },
+            attributes: ['name', 'contact', 'adresse', 'bio', 'link_web', 'createdAt'],
+        });
         res.status(200).send(coop);
     } catch (e) {
         res.status(500).send({

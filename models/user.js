@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.belongsTo(models.Role, {foreignKey:'role_id'});
       User.hasMany(models.Bookings, {foreignKey:'user_id'});
+      User.hasOne(models.Cooperative, {foreignKey:'admin'});
     }
   }
   User.init({

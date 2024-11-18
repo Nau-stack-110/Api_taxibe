@@ -55,7 +55,18 @@ const deleteTrajet  = async (req, res) =>{
 const getTrajetById  = async (req, res) =>{
     const id = req.params.id;
     try {
-        const trajet = await Trajet.findByPk(id, {include:[TaxiBe, Route]});
+        const trajet = await Trajet.findByPk(id,
+            { include:[{
+                model:Route,
+                attributes:['depart_city', 'arrival_city'],
+            },
+            {
+                model:TaxiBe,
+                attributes : ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id'],
+            },
+        ],
+        attributes: ['date', 'time', 'place_dispo'],}
+        );
         if(!trajet){
             res.status(404).json({
                 message:"Trajet not found !"
@@ -73,7 +84,18 @@ const getTrajetById  = async (req, res) =>{
 
 const getAllTrajet  = async (req, res) =>{
     try {
-        const trajet = await Trajet.findAll();
+        const trajet = await Trajet.findAll(
+            { include:[{
+                model:Route,
+                attributes:['depart_city', 'arrival_city'],
+            },
+            {
+                model:TaxiBe,
+                attributes : ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id'],
+            },
+        ],
+        attributes: ['date', 'time', 'place_dispo'],}
+        );
         res.status(200).send(trajet);
     } catch (e) {
         res.status(500).send({

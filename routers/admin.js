@@ -12,5 +12,6 @@ router.get('/users/', [CheckToken, CheckAdmin], adminController.getAllUsers);
 router.get('/users/:id', [CheckToken, CheckAdmin], adminController.getUserById);
 
 router.get('/stats', [CheckToken, CheckAdmin], adminController.getStats);
+router.post('/cooperative/:cooperativeId/admin', [CheckToken, CheckAdmin], adminController.createCoopAdmin);
 
 module.exports = router;

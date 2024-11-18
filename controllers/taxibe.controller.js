@@ -67,7 +67,11 @@ const deleteTaxiBeById = async (req, res) =>{
 
 const getAllTaxibe = async (req, res) =>{
     try {
-        const taxibe = await TaxiBe.findAll();
+        const taxibe = await TaxiBe.findAll({ 
+            include:{
+                model:Cooperative,
+                attributes:['name', 'contact', 'admin']
+            }});
         res.status(200).json(taxibe);
     } catch (e) {
         res.status(500).json({
@@ -80,7 +84,10 @@ const getAllTaxibe = async (req, res) =>{
 const getTaxibeById = async (req, res) =>{
     const id = req.params.id;
     try {
-        const taxibe = await TaxiBe.findByPk(id, {include:[Cooperative]});
+        const taxibe = await TaxiBe.findByPk(id,{ 
+            include:{
+                model:Cooperative,
+                attributes:['name', 'contact', 'admin']}});
         if(!taxibe){
             res.status(404).json({
                 message:"Taxibe not found !"

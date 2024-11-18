@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Cooperative extends Model {
     static associate(models) {
       Cooperative.hasMany(models.TaxiBe, {foreignKey:'cooperative_id'});
+      Cooperative.belongsTo(models.User, {foreignKey:'admin'});
     }
   }
   Cooperative.init({
@@ -13,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     adresse: DataTypes.STRING,
     bio: DataTypes.STRING,
     contact: DataTypes.INTEGER,
-    link_web: DataTypes.STRING
+    link_web: DataTypes.STRING, 
+    admin:DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Cooperative',

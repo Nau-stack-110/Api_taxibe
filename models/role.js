@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Role.init({
-    rolename: DataTypes.ENUM('Admin','User'),
+    rolename: DataTypes.ENUM('Admin','User','AdminCoop'),
     roledesc: DataTypes.STRING
   }, {
     sequelize,

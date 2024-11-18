@@ -26,10 +26,19 @@ const CheckAdmin = (req, res, next) =>{
     next();
 }
 
+const CheckAdminCoop = (req, res, next) =>{
+    const { role } = req.user;
+    console.log(role);
+    if (role !== 2) {
+        return res.status(400).send({message:"Admin Coopérative access only <__>"})
+    }
+    next();
+}
+
 const CheckUser = (req, res, next) =>{
     const { role} = req.user;
     console.log(role);
-    if (role !== 2) {
+    if (role !== 3) {
        return res.status(400).send({message:"User access only <__>"})
     }
     next();
@@ -39,4 +48,5 @@ module.exports = {
     CheckToken,
     CheckAdmin, 
     CheckUser,
+    CheckAdminCoop
 }

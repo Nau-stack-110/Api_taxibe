@@ -1,6 +1,5 @@
-const {User, Bookings, Payment, Route, TaxiBe, Trajet, Cooperative} = require('../models');
+const {User, Role, Bookings, Payment, Route, TaxiBe, Trajet, Cooperative} = require('../models');
 const bcryptjs = require('bcryptjs');
-const cooperative = require('../models/cooperative');
 
 const getStats = async (req, res) =>{
     try {
@@ -129,6 +128,47 @@ const changepassword = async (req, res) => {
     }
 };
 
+const createCoopAdmin = async (req, res) =>{
+    try {
+        const {name, email, password, tel, image } = req.body;
+        const {cooperativeId} = req.params;
+
+        const cooperative = await Cooperative.findByPk(cooperativeId);
+        if (!cooperative) {
+            return res.status(404).send({message: "Coopérative not found in the server!"});
+        }
+        let coopAdminRole = await Role.findOne({where: {rolename:'AdminCoop'}});
+        if (!coopAdminRole) {
+            coopAdminRole = await Role.create({rolename:'AdminCoop', roledesc:'Admin d\'une coopérative'});
+            console.log("Role Admin Coopérative créé avec succès!");
+        }else{
+            console.log("Role Admin Coopérative déja existant!");
+        }
+        const existAdmin = await User.findOne({where: {email}});
+        if (existAdmin) {
+            return res.status(400).send({message: 'Cet email est déjà utilsé par une autre utilisateur!'});
+        }
+        const salt = await bcryptjs.genSalt(10);
+        const hash = await bcryptjs.hash(password, salt);
+        const adminCoop = await User.create({
+            name,
+            email,
+            password:hash,
+            tel,
+            image,
+            role_id:coopAdminRole.id
+        });
+        cooperative.admin = adminCoop.id;
+        await cooperative.save();
+
+        return res.status(201).send({message:"Admin de coopérative créé avec succès!", adminCoop});
+    } catch (e) {
+        res.status(500).send({
+            message: 'Server internal error',
+            error: e.message
+        });
+    }
+}
 
 module.exports = {
     changepassword:changepassword,
@@ -137,5 +177,6 @@ module.exports = {
     updateMyProfile:updateMyProfile,
     getMyProfile:getMyProfile,
     getUserById:getUserById,
-    getStats:getStats
+    getStats:getStats,
+    createCoopAdmin:createCoopAdmin,
 }
