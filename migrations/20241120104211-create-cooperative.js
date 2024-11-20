@@ -2,44 +2,42 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Cooperatives', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      admin: {
+        type: Sequelize.INTEGER,
+        allowNull:true,
+        references:{
+          model:'Users',
+          key:'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete :'SET NULL',
+      },
       name: {
         type: Sequelize.STRING,
         allowNull:false
       },
-      email: {
+      adresse: {
         type: Sequelize.STRING,
         allowNull:false
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull:false
-      },
-      tel: {
-        type: Sequelize.INTEGER,
-        allowNull:false
-      },
-      image: {
+      bio: {
         type: Sequelize.STRING,
         allowNull:true
       },
-      role_id: {
+      contact: {
         type: Sequelize.INTEGER,
-        allowNull:false,
+        allowNull:false
       },
-      resetPin:{
-        type:Sequelize.INTEGER,
-        allowNull:true,
-      },
-      pinExpiry:{
-        type:Sequelize.DATE,
-        allowNull:true,
+      link_web: {
+        type: Sequelize.STRING,
+        allowNull:true
       },
       createdAt: {
         allowNull: false,
@@ -52,6 +50,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Cooperatives');
   }
 };

@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    
     static associate(models) {
       User.belongsTo(models.Role, {foreignKey:'role_id'});
       User.hasMany(models.Bookings, {foreignKey:'user_id'});
@@ -17,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     tel: DataTypes.INTEGER,
     image: DataTypes.STRING,
     role_id: DataTypes.INTEGER,
-    resetPin:DataTypes.INTEGER,
-    pinExpiry:DataTypes.DATE
+    resetPin: DataTypes.INTEGER,
+    pinExpiry: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',

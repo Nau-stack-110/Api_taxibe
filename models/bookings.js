@@ -4,19 +4,17 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Bookings extends Model {
+   
     static associate(models) {
-      Bookings.belongsTo(models.User);
-      Bookings.belongsTo(models.Route);
-      Bookings.belongsTo(models.TaxiBe);
-    } 
+      Bookings.belongsTo(models.User, {foreignKey:'user_id'});
+      Bookings.belongsTo(models.Trajet, {foreignKey:'trajet_id'});
+    }
   }
   Bookings.init({
     user_id: DataTypes.INTEGER,
-    route_id: DataTypes.INTEGER,
-    taxibe_id: DataTypes.INTEGER,
-    nb_mpandeha: DataTypes.INTEGER,
-    status: DataTypes.ENUM('pending','cancel','booked','completed'),
-    date_booking: DataTypes.DATEONLY
+    trajet_id: DataTypes.INTEGER,
+    nb_mpandeha: DataTypes.JSON,
+    date_booking: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Bookings',

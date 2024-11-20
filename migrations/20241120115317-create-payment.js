@@ -3,7 +3,13 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Payments', {
-      booking_id: {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      bookng_id: {
         type: Sequelize.INTEGER,
         allowNull:false,
         references:{

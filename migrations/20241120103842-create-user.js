@@ -2,36 +2,50 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('TaxiBes', {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      type: {
+      name: {
         type: Sequelize.STRING,
-        allowNull:false
+        allowNull:false,
       },
-      cooperative_id:{
+      email: {
+        type: Sequelize.STRING,
+        allowNull:false,
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull:false,
+      },
+      tel: {
         type: Sequelize.INTEGER,
         allowNull:false,
       },
-      imageTaxi: {
+      image: {
         type: Sequelize.STRING,
-        allowNull:true
+        allowNull:true,
       },
-      matricule: {
+      role_id: {
         type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull:false,
+        references:{
+          model:'Roles',
+          key:'id'
+        },
+        onDelete:'CASCADE',
+        onUpdate:'CASCADE'
       },
-      category: {
-        type: Sequelize.STRING,
-        allowNull:false
-      },
-      nb_total_place: {
+      resetPin: {
         type: Sequelize.INTEGER,
-        allowNull:false
+        allowNull:true,
+      },
+      pinExpiry: {
+        type: Sequelize.DATE,
+        allowNull:true,
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +58,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('TaxiBes');
+    await queryInterface.dropTable('Users');
   }
 };

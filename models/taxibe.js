@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class TaxiBe extends Model {
+
     static associate(models) {
       TaxiBe.hasMany(models.Bookings, {foreignKey:'taxibe_id'});
       TaxiBe.hasMany(models.Trajet, {foreignKey:'taxibe_id'});
@@ -14,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     cooperative_id: DataTypes.INTEGER,
     imageTaxi: DataTypes.STRING,
-    matricule: DataTypes.INTEGER,
+    matricule: DataTypes.STRING,
     category: DataTypes.STRING,
-    nb_total_place: DataTypes.INTEGER,
+    nb_total_place: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'TaxiBe',

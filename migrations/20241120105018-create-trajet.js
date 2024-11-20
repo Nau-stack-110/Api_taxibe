@@ -2,55 +2,50 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Bookings', {
+    await queryInterface.createTable('Trajets', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      user_id: {
+      taxibe_id: {
         type: Sequelize.INTEGER,
         allowNull:false,
         references:{
-          model:'Users',
-          key:'id'
+          model:'TaxiBes',
+          key:'id',
         },
-        onUpdate:'CASCADE',
-        onDelete:'CASCADE'
+        onDelete:'CASCADE',
+        onUpdate:'CASCADE'
       },
       route_id: {
         type: Sequelize.INTEGER,
         allowNull:false,
         references:{
           model:'Routes',
-          key:'id'
+          key:'id',
         },
-        onUpdate:'CASCADE',
-        onDelete:'CASCADE'
+        onDelete:'CASCADE',
+        onUpdate:'CASCADE'
       },
-      taxibe_id: {
-        type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Taxibes',
-          key:'id'
-        },
-        onUpdate:'CASCADE',
-        onDelete:'CASCADE'
-      },
-      nb_mpandeha: {
-        type: Sequelize.INTEGER,
+      date: {
+        type: Sequelize.DATE,
         allowNull:false
       },
-      status: {
-        type: Sequelize.ENUM('pending','cancel','booked','completed'),
-        allowNull:false,
-        defaultValue:'pending'
-      },
-      date_booking: {
-        type: Sequelize.DATEONLY,
+      time: {
+        type: Sequelize.TIME,
         allowNull:false
+      },
+      place_dispo: {
+        type: Sequelize.JSON,
+        allowNull:false,
+        defaultValue:[
+          'a1', 'a2', 'a3', 'a4', 'a5',
+          'b1', 'b2', 'b3', 'b4', 'b5',
+          'c1', 'c2', 'c3', 'c4', 'c5',
+          'd1', 'd2', 'd3', 'd4', 'd5',
+        ],
       },
       createdAt: {
         allowNull: false,
@@ -63,6 +58,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Bookings');
+    await queryInterface.dropTable('Trajets');
   }
 };

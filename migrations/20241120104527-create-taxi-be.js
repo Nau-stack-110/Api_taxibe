@@ -2,42 +2,40 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Trajets', {
+    await queryInterface.createTable('TaxiBes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      taxibe_id: {
-        type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'TaxiBes',
-          key:'id'
-        },
-        onUpdate:'CASCADE',
-        onDelete:'CASCADE'
-      },
-      route_id: {
-        type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Routes',
-          key:'id'
-        },
-        onUpdate:'CASCADE',
-        onDelete:'CASCADE'
-      },
-      date: {
-        type: Sequelize.DATEONLY,
-        allowNull:false,
-      },
-      time: {
-        type: Sequelize.TIME,
+      type: {
+        type: Sequelize.STRING,
         allowNull:false
       },
-      place_dispo: {
+      cooperative_id: {
+        type: Sequelize.INTEGER,
+        allowNull:false,
+        references:{
+          model:'Cooperatives',
+          key:'id',
+        },
+        onDelete:'CASCADE',
+        onUpdate:'CASCADE'
+      },
+      imageTaxi: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
+      matricule: {
+        type: Sequelize.STRING,
+        allowNull:false
+      },
+      category: {
+        type: Sequelize.STRING,
+        allowNull:false
+      },
+      nb_total_place: {
         type: Sequelize.INTEGER,
         allowNull:false
       },
@@ -52,6 +50,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Trajets');
+    await queryInterface.dropTable('TaxiBes');
   }
 };
