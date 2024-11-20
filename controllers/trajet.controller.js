@@ -3,10 +3,16 @@ const {Trajet, TaxiBe, Route,} = require("../models");
 const createTrajet  = async (req, res) =>{
     const { taxibe_id, route_id, date, time, place_dispo} = req.body;
     try {
-        const trajet = await Trajet.create({taxibe_id, route_id, date, time, place_dispo});
-        res.status(201).json(trajet);
+        const trajet = await Trajet.create({
+            taxibe_id,
+            route_id,
+            date, 
+            time, 
+            place_dispo}
+        );
+        res.status(201).send(trajet);
     } catch (e) {
-        res.status(400).json({
+        res.status(400).send({
             message:'erreur lors de la création d\'un trajet',
             error:e.message
         });

@@ -4,7 +4,6 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Cooperative extends Model {
- 
     static associate(models) {
       Cooperative.hasMany(models.TaxiBe, {foreignKey:'cooperative_id'});
       Cooperative.belongsTo(models.User, {foreignKey:'admin'});
