@@ -9,6 +9,7 @@ router.delete('/:id', [CheckToken, CheckAdmin], trajetController.deleteTrajet );
 
 
 router.get('/', trajetController.getAllTrajet );
+router.get('/available-taxibe', trajetController.getAvailableTaxi );
 router.get('/:id', trajetController.getTrajetById );
 
 module.exports = router;

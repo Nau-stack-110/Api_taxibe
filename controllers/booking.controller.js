@@ -1,44 +1,42 @@
-const { Bookings, Trajet } = require('../models');
+const { Bookings, Trajet, User, Route, TaxiBe, Cooperative } = require('../models');
 
 const createBooking = async (req, res) =>{
     const user_id = req.user.id;
     const { trajet_id, nb_mpandeha } = req.body;
-    console.log("Corps de la requete:", req.body);
     try {
-        if (!trajet_id || !nb_mpandeha) {
-            console.log("validation echoué , manque des données");
-            return res.status(400).send({message:"Veuiller fournir un trajet valide et des places"});
-        }
-        const trajet = await Trajet.findOne({where:{id:trajet_id}});
-        console.log("trajet trouvé : ", trajet );
+        const trajet = await Trajet.findOne({
+            where: {id: trajet_id},
+            include: {
+                model: TaxiBe,
+                attributes: ['nb_total_place'],
+            },
+        });
         if (!trajet) {
-            return res.status(404).send({message:"Trajet not found!"})
+            return res.status(404).send({error : "Trajet non trouvé! "});
         }
-        const availablePlace = JSON.parse(trajet.place_dispo || '[]');
-        console.log('availablePlace : ', availablePlace);
-        const isPlaceAvailable = nb_mpandeha.every((place) => availablePlace.includes(place));
-        if (!isPlaceAvailable) {
+        const {nb_total_place} = trajet.taxibe_id;
+        const place_dispo = trajet.place_dispo;
+        if (nb_mpandeha > nb_total_place){
             return res.status(400).send({
-                message:"Une ou plusieurs places selected n'est pas disponible!"
+                error : `"Nombre de place démandés (${nb_mpandeha} dépasse le total de places disponibles dans le taxibe (${nb_total_place})`,
             });
         }
-        const updatePlace = availablePlace.filter((place) => !nb_mpandeha.includes(place));
-        await sequelize.transaction(async (transaction) =>{
-            await Bookings.create({
-                trajet_id,
-                user_id,
-                nb_mpandeha,
-                date_booking: new Date(),
-            },
-            { transaction }
-        );
-        await trajet.update(
-            { place_dispo: JSON.stringify(updatePlace)},
-            { transaction }
-            );
+        if (nb_mpandeha > place_dispo){
+            return res.status(400).send({
+                error : `"Nombre de place démandés (${nb_mpandeha} dépasse le total de places disponibles (${place_dispo})`,
+            });
+        }
+        const booking = await Bookings.create({
+            trajet_id,
+            user_id:user_id,
+            nb_mpandeha,
+            date_booking: new Date(),
         });
+
+        trajet.place_dispo -= nb_mpandeha;
+        await trajet.save();
         res.status(201).send({
-            message:"Reservation effectuée avec succès",
+            message:"Reservation effectuée avec succès", booking
         });
     } catch (e) {
         res.status(500).send({
@@ -48,21 +46,37 @@ const createBooking = async (req, res) =>{
     }
 }
 
-const deleteBooking = async (req, res) =>{
-
-}
-
-const updateBooking = async (req, res) =>{
-
-}
-
-const getBookingById = async (req, res) =>{
-
-}
-
 const getAllBooking = async (req, res) =>{
     try {
-        const booking = await Bookings.findAll();
+        const booking = await Bookings.findAll(
+            { 
+                include:[
+                    {
+                        model:Trajet,
+                        attributes:['date', 'route_id', 'taxibe_id'],
+                        include : [
+                            {
+                                model:TaxiBe,
+                                attributes: ['matricule', 'type', 'category'],
+                                include:{
+                                    model:Cooperative,
+                                    attributes: ['name', 'contact'],
+                                },
+                            },
+                            {
+                                model:Route,
+                                attributes: ['depart_city', 'arrival_city'],
+                            }
+                        ],
+                    },
+                    {
+                        model:User,
+                        attributes : ['name', 'email', 'tel', 'image'],
+                    },
+                ],
+                attributes : ['id', 'nb_mpandeha', 'date_booking']
+            }
+        );
         res.status(200).send(booking);
     } catch (e) {
         res.status(500).send({
@@ -71,10 +85,90 @@ const getAllBooking = async (req, res) =>{
     }
 }
 
+const cancelBooking = async (req, res) =>{
+    try { 
+        const booking = await Bookings.findOne({
+            where : {
+                // id:booking_id,
+                user_id:req.user.id,
+            },
+            include : [
+                {
+                    model: Trajet,
+                    attributes: ['id', 'place_dispo'],
+                },
+            ]
+        });
+        if (!booking) {
+            return res.status(404).send({message:"Reservation non trouvé !"});
+        }
+        const trajet = await Trajet.findByPk(booking.trajet_id);
+        trajet.place_dispo += booking.nb_mpandeha;
+        await trajet.save();
+
+        await booking.destroy();
+        res.status(200).send({message: 'Reservation annulée avec succès!'});
+    } catch (error) {
+        res.status(500).send({
+            message:'erreur lors de l\'annulation d\'une reservation', 
+            error:error.message
+        });
+    }
+}
+
+const updateMyBooking = async (req, res) =>{
+ 
+}
+
+const getBookingById = async (req, res) =>{
+
+}
+
+const getMyBooking = async (req, res) =>{
+    try {
+        const booking = await Bookings.findAll(
+            { where: {user_id:req.user.id},
+                include:[
+                    {
+                        model:Trajet,
+                        attributes:['id', 'date', 'route_id', 'taxibe_id'],
+                        include : [
+                            {
+                                model:TaxiBe,
+                                attributes: ['matricule', 'type', 'category'],
+                                include:{
+                                    model:Cooperative,
+                                    attributes: ['name', 'contact'],
+                                },
+                            },
+                            {
+                                model:Route,
+                                attributes: ['depart_city', 'arrival_city'],
+                            }
+                        ],
+                    },
+                    {
+                        model:User,
+                        attributes : ['name', 'email', 'tel', 'image'],
+                    },
+                ],
+                attributes : ['id', 'nb_mpandeha', 'date_booking', 'ticketCode', 'is_booked']
+            }
+        );
+        res.status(200).send(booking);
+    } catch (e) {
+        res.status(500).send({
+            message:'erreur lors de la récuperation de votre reservation', 
+            error: e.message
+        });
+    }
+}
+
 module.exports = {
     getAllBooking:getAllBooking,
     getBookingById:getBookingById,
-    updateBooking:updateBooking,
-    deleteBooking:deleteBooking,
-    createBooking:createBooking
+    updateMyBooking:updateMyBooking,
+    cancelBooking:cancelBooking,
+    createBooking:createBooking,
+    getMyBooking:getMyBooking
 }

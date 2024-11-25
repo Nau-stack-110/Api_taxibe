@@ -30,7 +30,7 @@ module.exports = {
         onDelete:'CASCADE'
       },
       nb_mpandeha: {
-        type: Sequelize.JSON,
+        type: Sequelize.INTEGER,
         allowNull:false
       },
       date_booking: {

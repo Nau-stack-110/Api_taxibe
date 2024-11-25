@@ -33,14 +33,9 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull:false
       },
-      time: {
-        type: Sequelize.TIME,
-        allowNull:false
-      },
       place_dispo: {
-        type: Sequelize.JSON,
+        type: Sequelize.INTEGER,
         allowNull:false,
-        defaultValue:'[]'
       },
       createdAt: {
         allowNull: false,

@@ -1,13 +1,13 @@
+const { where } = require("sequelize");
 const {Trajet, TaxiBe, Route,} = require("../models");
 
 const createTrajet  = async (req, res) =>{
-    const { taxibe_id, route_id, date, time, place_dispo} = req.body;
+    const { taxibe_id, route_id, date, place_dispo} = req.body;
     try {
         const trajet = await Trajet.create({
             taxibe_id,
             route_id,
             date, 
-            time, 
             place_dispo}
         );
         res.status(201).send(trajet);
@@ -21,9 +21,9 @@ const createTrajet  = async (req, res) =>{
 
 const updateTrajet  = async (req, res) =>{
     const id = req.params.id;
-    const { taxibe_id, route_id, date, time, place_dispo} = req.body;
+    const { taxibe_id, route_id, date, place_dispo} = req.body;
     try {
-        const trajet = await Trajet.update({taxibe_id, route_id, date, time, place_dispo}, {where :{id:id}});
+        const trajet = await Trajet.update({taxibe_id, route_id, date, place_dispo}, {where :{id:id}});
         if (!trajet) {
             res.status(404).json({
                 message:"Trajet not found !"
@@ -71,7 +71,7 @@ const getTrajetById  = async (req, res) =>{
                 attributes : ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id'],
             },
         ],
-        attributes: ['date', 'time', 'place_dispo'],}
+        attributes: ['date', 'place_dispo'],}
         );
         if(!trajet){
             res.status(404).json({
@@ -100,7 +100,7 @@ const getAllTrajet  = async (req, res) =>{
                 attributes : ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id'],
             },
         ],
-        attributes: ['date', 'time', 'place_dispo'],}
+        attributes: ['date', 'place_dispo'],}
         );
         res.status(200).send(trajet);
     } catch (e) {
@@ -111,10 +111,51 @@ const getAllTrajet  = async (req, res) =>{
     }
 }
 
+const getAvailableTaxi = async (req, res) =>{
+    const {date, route_id} = req.query;
+    try {
+        if (!date || !route_id) {
+            return res.status(400).send({error:"Veuillez fournir une date et un ID de route. "});
+        }
+        const trajet = await Trajet.findAll(
+            { 
+            where: {
+                date, route_id,
+            },
+            include:[
+                {
+                    model:Route,
+                    attributes:['depart_city', 'arrival_city'],
+                },
+                {
+                    model:TaxiBe,
+                    attributes : ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id'],
+                },
+            ],
+            }
+        );
+        if (trajet.length === 0) {
+            return res.status(404).send({message:"Aucun TaxiBe disponible pour cette date et cette route."});
+        }
+        const taxibes = trajet.map((trajet) => ({
+            date:trajet.date,
+            route:trajet.route_id,
+            taxibe:trajet.taxibe_id
+        }));
+        res.status(200).send(taxibes);
+    } catch (e) {
+        res.status(500).send({
+            message:'erreur lors de la recherche des taxiBes disponibles!', 
+            error:e.message
+        });
+    }
+}
+
 module.exports = {
     getAllTrajet,
     getTrajetById,
     createTrajet,
     deleteTrajet,
-    updateTrajet
+    updateTrajet,
+    getAvailableTaxi,
 }

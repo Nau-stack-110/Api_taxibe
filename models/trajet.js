@@ -13,9 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   Trajet.init({
     taxibe_id: DataTypes.INTEGER,
     route_id: DataTypes.INTEGER,
-    date: DataTypes.DATEONLY,
-    time: DataTypes.TIME,
-    place_dispo: DataTypes.JSON,
+    date: DataTypes.DATE,
+    place_dispo: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Trajet',

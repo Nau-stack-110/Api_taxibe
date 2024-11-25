@@ -43,9 +43,9 @@ const getMyProfile = async (req, res) =>{
 }
 
 const updateMyProfile = async (req, res) =>{
-    const {name, email, tel} = req.body;
+    const {name, email, tel, image} = req.body;
     try {
-        const user = await User.update({name, email, tel}, {where : {id:req.user.id}});
+        const user = await User.update({name, email, tel, image}, {where : {id:req.user.id}});
         if (!user) {
            return res.status(404).send({message:"User not found!"}); 
         }

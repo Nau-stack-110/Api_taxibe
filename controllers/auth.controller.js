@@ -73,7 +73,7 @@ const login = async (req, res) =>{
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch){
-            return res.status(400).send({message:"password incorrect"});
+            return res.status(400).send({message:"password incorrect ou utilisateur non trouvé!"});
         }
         const token = jwt.sign({
             id:user.id, name:user.name, email:user.email, role:user.role_id,

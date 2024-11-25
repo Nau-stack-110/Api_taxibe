@@ -13,8 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   Bookings.init({
     user_id: DataTypes.INTEGER,
     trajet_id: DataTypes.INTEGER,
-    nb_mpandeha: DataTypes.JSON,
-    date_booking: DataTypes.DATE
+    nb_mpandeha: DataTypes.INTEGER,
+    date_booking: DataTypes.DATE,
+    ticketCode:DataTypes.STRING,
+    is_booked:DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Bookings',
