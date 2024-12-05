@@ -15,10 +15,10 @@ module.exports = {
       "dialect": "mysql"
     },
     "production": {
-      "username": "root",
-      "password": null,
-      "database": "database_production",
-      "host": "127.0.0.1",
+      "username": "udgkuwo0xrrzc7nm",
+      "password": "udgkuwo0xrrzc7nm",
+      "database": "bc7ryr9lhasequprjfua",
+      "host": "bc7ryr9lhasequprjfua-mysql.services.clever-cloud.com",
       "dialect": "mysql"
     }
 }
