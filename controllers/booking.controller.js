@@ -116,9 +116,6 @@ const cancelBooking = async (req, res) =>{
     }
 }
 
-const updateMyBooking = async (req, res) =>{
- 
-}
 
 const getBookingById = async (req, res) =>{
 
@@ -167,7 +164,6 @@ const getMyBooking = async (req, res) =>{
 module.exports = {
     getAllBooking:getAllBooking,
     getBookingById:getBookingById,
-    updateMyBooking:updateMyBooking,
     cancelBooking:cancelBooking,
     createBooking:createBooking,
     getMyBooking:getMyBooking
