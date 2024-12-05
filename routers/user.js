@@ -11,7 +11,7 @@ router.put('/me', [CheckToken, CheckUser], userController.updateMyProfile);
 router.delete('/me/delete', [CheckToken, CheckUser], userController.deleteMyProfile);
 router.put('/me/password/change', [CheckToken, CheckUser], userController.changepassword);
 
-// ticket
+// tickets
 router.post('/generate-ticket/:id', [CheckToken, CheckUser], generatePDFTicket);
 router.post('/verify-ticket/', [CheckToken, CheckUser], verifyTicketCode);
 
@@ -19,7 +19,5 @@ router.post('/verify-ticket/', [CheckToken, CheckUser], verifyTicketCode);
 router.post('/booking/create', [CheckToken, CheckUser], bookingController.createBooking);
 router.delete('/booking/me', [CheckToken, CheckUser], bookingController.cancelBooking);
 router.get('/booking/me/', [CheckToken, CheckUser], bookingController.getMyBooking);
-router.put('/booking/me',[ CheckToken, CheckUser], bookingController.updateMyBooking);
-
 
 module.exports = router;
