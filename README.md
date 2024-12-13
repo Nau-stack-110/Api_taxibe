@@ -30,9 +30,23 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 ![MySQL](https://img.shields.io/badge/MySQL-v8.0.26-red)
 
 ## Routes et méthodes
+## table Taxibes
 
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
-|---------------------------|---------|--------------------------------------------------|--------------|--------|
+|---------------------------|---------|--------------------------------------------------|--------------|--------|  
+| `/taxibe`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
+| `/taxibe/:id`              | GET     | Détails d'un taxi spécifique                     | ✅            | ✅      |
+| `/taxibe/:id`              | GET    | Créer un nouvel taxibe                            | ✅            | ✅      |
+| `/user/register`           | POST    | Inscription d'un nouvel utilisateur              | ✅            | ❌      |
+| `/user/login`              | POST    | Connexion de l'utilisateur                       | ✅            | ❌      |
+| `/user/logout`             | POST    | Déconnexion de l'utilisateur                     | ✅            | ❌      |
+| `/admin/stats`             | GET     | Statistiques pour l'admin                        | ❌            | ✅      |
+| `/admin/taxibe`            | POST    | Ajouter un nouveau taxi                          | ❌            | ✅      |
+| `/admin/booking/:id`       | DELETE  | Supprimer une réservation                        | ❌            | ✅      |
+
+
+| Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
+|---------------------------|---------|--------------------------------------------------|--------------|--------|  
 | `/taxibe`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
 | `/taxibe/:id`              | GET     | Détails d'un taxi spécifique                     | ✅            | ✅      |
 | `/booking`                 | POST    | Créer une réservation                            | ✅            | ✅      |
@@ -42,7 +56,6 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 | `/admin/stats`             | GET     | Statistiques pour l'admin                        | ❌            | ✅      |
 | `/admin/taxibe`            | POST    | Ajouter un nouveau taxi                          | ❌            | ✅      |
 | `/admin/booking/:id`       | DELETE  | Supprimer une réservation                        | ❌            | ✅      |
-
 ## Dépendances
 
 Voici les principales dépendances utilisées dans ce projet, avec des badges pour chaque technologie.
