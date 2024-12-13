@@ -61,26 +61,29 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 ## table Cooperative et méthodes
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
-| `/cooperative`                  | GET     | Liste des cooperative disponibles                      | ❌            | ✅      |
+| `/cooperative`                  | GET     | Liste des cooperative disponibles                      | ✅            | ✅      |
 | `/cooperative/:id`              | GET     | Détails d'un cooperative spécifique                     | ❌            | ✅      |
 | `/cooperative/`                 | POST    | Créer un nouvel cooperative                           | ❌            | ✅      |
 | `/cooperative/:id`              | DELETE  | Supprimer un cooperative spéchifique               | ❌            | ✅      |
 | `/cooperative/:id`              | PUT     | Mettre à jour un cooperative                      | ❌            | ✅      |
 
 
-
-
+## statistiques et administration
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
-| `/trajet`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
-| `/trajet/:id`              | GET     | Détails d'un taxi spécifique                     | ✅            | ✅      |
-| `/booking`                 | POST    | Créer une réservation                            | ✅            | ✅      |
-| `/user/register`           | POST    | Inscription d'un nouvel utilisateur              | ✅            | ❌      |
-| `/user/login`              | POST    | Connexion de l'utilisateur                       | ✅            | ❌      |
-| `/user/logout`             | POST    | Déconnexion de l'utilisateur                     | ✅            | ❌      |
-| `/admin/stats`             | GET     | Statistiques pour l'admin                        | ❌            | ✅      |
-| `/admin/taxibe`            | POST    | Ajouter un nouveau taxi                          | ❌            | ✅      |
-| `/admin/booking/:id`       | DELETE  | Supprimer une réservation                        | ❌            | ✅      |
+| `/admin/stats`                  | GET     | Liste des statistiques disponibles                      | ❌            | ✅      |
+| `/admin/users`              | GET     | Listes des utilisateurs                     |
+❌            | ✅      |
+| `/admin/users/:id`                 | GET    | Details d'un utilisateur spécifique                           | ❌            | ✅      |
+| `/admin/users/:id`              | DELETE  | Supprimer un utilisateur spéchifique             | ❌            | ✅      |
+| `/admin/me`              | GET     | Detais du profile de l'admin                    | ❌            | ✅      |
+| `/admin/me`              | PUT     | Mettre à jour le profile de l'admin                    | ❌            | ✅      |
+| `/admin/password/change`              | PUT     | Changer le mot de passe de l'admin                    | ❌            | ✅      |
+| `/admin/cooperative/:cooperativeId/admin`              | POST     | Creer un admin pour un cooperative spécifique                 | ❌            | ✅      |
+
+
+
+
 ## Dépendances
 
 Voici les principales dépendances utilisées dans ce projet, avec des badges pour chaque technologie.
