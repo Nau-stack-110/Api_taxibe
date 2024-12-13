@@ -42,6 +42,8 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 ❌            | ✅      |
 
 
+
+## table Routes 
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
 | `/taxibe`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
