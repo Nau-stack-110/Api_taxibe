@@ -48,8 +48,7 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 | `/route/:id`              | GET     | Détails d'un route spécifique                     | ✅            | ✅      |
 | `/route/`                 | POST    | Créer un nouvel route                           | ❌            | ✅      |
 | `/route/:id`              | DELETE  | Supprimer un route spécifiques                | ❌            | ✅      |
-| `/route/:id`              | PUT     | Mettre à jour un routes                       |
-❌            | ✅      |
+| `/route/:id`              | PUT     | Mettre à jour un routes                             | ❌            | ✅      |
 
 
 ## table Trajets et méthodes
