@@ -168,5 +168,9 @@ npx sequelize-cli db:migrate
 ```bash
 npm run dev
 ```
-### Test API via POSTMAN or Curl with the link above
+### Test API via POSTMAN with the endpoint above
+Server is running at :
 
+```bash
+http://0.0.0.0/4000
+```
