@@ -37,16 +37,38 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 | `/taxibe`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
 | `/taxibe/:id`              | GET     | Détails d'un taxi spécifique                     | ✅            | ✅      |
 | `/taxibe/`                 | POST    | Créer un nouvel taxibe                           | ❌            | ✅      |
-| `/taxibe/:id`              | DELETE  | Inscription d'un nouvel utilisateur              | ❌            | ✅      |
+| `/taxibe/:id`              | DELETE  | Supprimer un taxibe spécifique               | ❌            | ✅      |
 | `/taxibe/:id`              | PUT     | Mettre à jour les taxibes                     | ❌            | ✅      |
 
 
-
-## table Routes 
+## table Routes et méthodes
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
-| `/taxibe`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
-| `/taxibe/:id`              | GET     | Détails d'un taxi spécifique                     | ✅            | ✅      |
+| `/route`                  | GET     | Liste des routes disponibles                      | ✅            | ✅      |
+| `/route/:id`              | GET     | Détails d'un route spécifique                     | ✅            | ✅      |
+| `/route/`                 | POST    | Créer un nouvel route                           | ❌            | ✅      |
+| `/route/:id`              | DELETE  | Supprimer un route spécifiques                | ❌            | ✅      |
+| `/route/:id`              | PUT     | Mettre à jour un routes                       |
+❌            | ✅      |
+
+
+## table Trajets et méthodes
+| Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
+|---------------------------|---------|--------------------------------------------------|--------------|--------|  
+| `/trajet`                  | GET     | Liste des trajets disponibles                      | ✅            | ✅      |
+| `/trajet/:id`              | GET     | Détails d'un trajet spécifique                     | ✅            | ✅      |
+| `/trajet/`                 | POST    | Créer un nouvel trjajet                           | ❌            | ✅      |
+| `/trajet/:id`              | DELETE  | Supprimer un trajet spéchifique               | ❌            | ✅      |
+| `/trajet/:id`              | PUT     | Mettre à jour un trajet                      | ❌            | ✅      |
+
+
+
+
+
+| Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
+|---------------------------|---------|--------------------------------------------------|--------------|--------|  
+| `/trajet`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
+| `/trajet/:id`              | GET     | Détails d'un taxi spécifique                     | ✅            | ✅      |
 | `/booking`                 | POST    | Créer une réservation                            | ✅            | ✅      |
 | `/user/register`           | POST    | Inscription d'un nouvel utilisateur              | ✅            | ❌      |
 | `/user/login`              | POST    | Connexion de l'utilisateur                       | ✅            | ❌      |
