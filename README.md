@@ -86,8 +86,7 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 | `/users/me/delete`              | DELETE  | Supprimer un compte de l'utilisateur connecté               | ✅            | ❌      |
 | `/users/generate-ticket/:id`              | POST     | Generer un ticket pour la réservation de l'utilisateur connecté                      | ✅            | ❌      |
 | `/users/verify-ticket/:id`              | POST     | Verifier un code ticket pour la réservation de l'utilisateur connecté                      | ✅            | ❌      |
-| `/users/booking/create`              | POST     | Créer une réservation du taxibe pour
-l'utilisateur connecté                      | ✅            | ❌      |
+| `/users/booking/create`              | POST    | Créer une réservation du taxibe pour l'utilisateur connecté                    | ✅            | ❌      |
 | `/users/booking/me`              | GET     | Lister la réservation de l'utilisateur connecté                      | ✅            | ❌      |
 | `/users/booking/me`              | DELETE     | Supprimer ou annuler la réservation de l'utilisateur connecté                      | ✅            | ❌      |
 
