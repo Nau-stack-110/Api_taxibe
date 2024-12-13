@@ -69,5 +69,24 @@ Voici les principales dépendances utilisées dans ce projet, avec des badges po
 
 ```bash
 npm install
+```
+### Next Start your mysql, Apache server connection (XAMPP or WAMPP)
 
+### Commandes Pour creer un database
+
+```bash
+npx sequelize-cli db:create
+```
+
+### Commandes pour migrer les données
+
+```bash
+npx sequelize-cli db:migrate
+```
+### Commande pour demarrer le serveur backend
+
+```bash
+npm run dev
+```
+### Test API via POSTMAN or Curl with the link above
 
