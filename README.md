@@ -72,8 +72,7 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
 | `/admin/stats`                  | GET     | Liste des statistiques disponibles                      | ❌            | ✅      |
-| `/admin/users`              | GET     | Listes des utilisateurs                     |
-❌            | ✅      |
+| `/admin/users`              | GET     | Listes des utilisateurs                      |❌            | ✅      |
 | `/admin/users/:id`                 | GET    | Details d'un utilisateur spécifique                           | ❌            | ✅      |
 | `/admin/users/:id`              | DELETE  | Supprimer un utilisateur spéchifique             | ❌            | ✅      |
 | `/admin/me`              | GET     | Detais du profile de l'admin                    | ❌            | ✅      |
