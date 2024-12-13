@@ -36,9 +36,9 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
 | `/taxibe`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
 | `/taxibe/:id`              | GET     | Détails d'un taxi spécifique                     | ✅            | ✅      |
-| `/taxibe/`                 | POST    | Créer un nouvel taxibe                            | ❌            | ✅      |
-| `/taxibe/:id`           | DELETE    | Inscription d'un nouvel utilisateur              | ❌            | ✅      |
-| `/taxibe/:id`            |PUT       | Mettre à jour les taxibes                        |
+| `/taxibe/`                 | POST    | Créer un nouvel taxibe                           | ❌            | ✅      |
+| `/taxibe/:id`            | DELETE    | Inscription d'un nouvel utilisateur              | ❌            | ✅      |
+| `/taxibe/:id`            | PUT       | Mettre à jour les taxibes                        |
 ❌            | ✅      |
 
 
