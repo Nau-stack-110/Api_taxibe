@@ -1,9 +1,6 @@
-# url api
-https://api-taxibe.onrender.com
+# Lien du projet en production
+- (https://api-taxibe-mada.up.railway.app/)
 
-# https://api-taxibe-mada.up.railway.app/
-
-** Project taxibe cooperative api à Madagascar!
 # API REST Réservation TaxiBe Coopérative à Madagascar
 
 Une API REST permettant la gestion de réservations de taxi pour plusieurs coopératives de taxis à Madagascar. Ce projet utilise Node.js, Express, Sequelize-CLI, MySQL et d'autres technologies pour la gestion des réservations et la génération de PDF.
@@ -60,6 +57,15 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 | `/trajet/:id`              | DELETE  | Supprimer un trajet spéchifique               | ❌            | ✅      |
 | `/trajet/:id`              | PUT     | Mettre à jour un trajet                      | ❌            | ✅      |
 
+
+## table Cooperative et méthodes
+| Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
+|---------------------------|---------|--------------------------------------------------|--------------|--------|  
+| `/cooperative`                  | GET     | Liste des cooperative disponibles                      | ❌            | ✅      |
+| `/cooperative/:id`              | GET     | Détails d'un cooperative spécifique                     | ❌            | ✅      |
+| `/cooperative/`                 | POST    | Créer un nouvel cooperative                           | ❌            | ✅      |
+| `/cooperative/:id`              | DELETE  | Supprimer un cooperative spéchifique               | ❌            | ✅      |
+| `/cooperative/:id`              | PUT     | Mettre à jour un cooperative                      | ❌            | ✅      |
 
 
 
