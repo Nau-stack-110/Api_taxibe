@@ -27,8 +27,17 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 ![MySQL](https://img.shields.io/badge/MySQL-v8.0.26-red)
 
 ## Routes et méthodes
-## table Taxibes
+## table Cooperative et méthodes
+| Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
+|---------------------------|---------|--------------------------------------------------|--------------|--------|  
+| `/auth/signup`                  | POST     | Créer un nouveau compte utilisateur                      | ✅            | ✅      |
+| `/auth/login`              | POST     | Connexion de l'utilisateur                    | ✅            | ✅      |
+| `/auth/forgot/password`                 | POST    | Changer le mot de passe oublié                           | ✅            | ✅      |
+| `/auth/reset/password`              | POST  | Réinitialiser le mot de passe utilisateur               | ✅            | ✅      |
 
+
+
+## table Taxibes
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
 | `/taxibe`                  | GET     | Liste des taxis disponibles                      | ✅            | ✅      |
@@ -68,10 +77,28 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 | `/cooperative/:id`              | PUT     | Mettre à jour un cooperative                      | ❌            | ✅      |
 
 
+## table Utilisateur et bookings and ticket
+| Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
+|---------------------------|---------|--------------------------------------------------|--------------|--------|  
+| `/users/me`                  | GET     | Récuperer le profil de l'utilisateur connecté                      | ✅            | ❌      |
+| `/users/me`              | PUT     | Mettre à jour le profile de l'utilisateur connecté                     | ✅            | ❌      |
+| `/users/password/change`                 | PUT    | Modifier le mot de passe de l'utilisateur connecté                           | ✅            | ❌      |
+| `/users/me/delete`              | DELETE  | Supprimer un compte de l'utilisateur connecté               | ✅            | ❌      |
+| `/users/generate-ticket/:id`              | POST     | Generer un ticket pour la réservation de l'utilisateur connecté                      | ✅            | ❌      |
+| `/users/verify-ticket/:id`              | POST     | Verifier un code ticket pour la réservation de l'utilisateur connecté                      | ✅            | ❌      |
+| `/users/booking/create`              | POST     | Créer une réservation du taxibe pour
+l'utilisateur connecté                      | ✅            | ❌      |
+| `/users/booking/me`              | GET     | Lister la réservation de l'utilisateur connecté                      | ✅            | ❌      |
+| `/users/booking/me`              | DELETE     | Supprimer ou annuler la réservation de l'utilisateur connecté                      | ✅            | ❌      |
+
+
+
 ## statistiques et administration
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
 | `/admin/stats`                  | GET     | Liste des statistiques disponibles                      | ❌            | ✅      |
+| `/admin/booking`                  | GET     | Liste des réservations                     | ❌            | ✅      |
+| `/admin/booking/:id`                  | GET     | Details d'une réservation spécifique                     | ❌            | ✅      |
 | `/admin/users`              | GET     | Listes des utilisateurs                      |❌            | ✅      |
 | `/admin/users/:id`                 | GET    | Details d'un utilisateur spécifique                           | ❌            | ✅      |
 | `/admin/users/:id`              | DELETE  | Supprimer un utilisateur spéchifique             | ❌            | ✅      |
@@ -111,6 +138,20 @@ Voici les principales dépendances utilisées dans ce projet, avec des badges po
 npm install
 ```
 ### Next Start your mysql, Apache server connection (XAMPP or WAMPP)
+Créer un fichier .env in the racine directory
+Add script below to the .env file
+```m
+DB_USERNAME = **your database username (eg:root)**
+DB_PASSWORD = 
+DB_DATABASE = **your database**
+DB_HOST = 127.0.0.1
+SECRET_KEY = **your secret**
+ADMIN_EMAIL = **your admin email**
+ADMIN_NAME = **your admin name**
+ADMIN_PASSWORD = **your admin password**
+ADMIN_TEL = **your admin tel**
+ADMIN_IMAGE = **your admin image**
+```
 
 ### Commandes Pour creer un database
 
