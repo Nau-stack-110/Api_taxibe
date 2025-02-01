@@ -13,6 +13,20 @@ const createRoute  = async (req, res) =>{
     }
 }
 
+const createRoutePls = async (req, res) =>{
+    const routeData= req.body;
+    try {
+        const route = await Route.bulkCreate(routeData);
+        res.status(201).json(route);
+    } catch (e) {
+        res.status(400).json({
+            message:'erreur lors de la création des route',
+            error:e.message
+        });
+    }
+}
+
+
 const updateRoute  = async (req, res) =>{
     const id = req.params.id;
     const {depart_city, arrival_city } = req.body;
@@ -52,6 +66,28 @@ const deleteRoute  = async (req, res) =>{
     }
 }
 
+
+const deleteAllRoute  = async (req, res) =>{
+    try {
+        const route = await Route.destroy({where : {}});
+        if (!route) {
+            res.status(404).json({
+                message:"Route not found !"
+            }); 
+        } else {
+            res.status(200).json({
+                message:"routes supprimées avec succès!"
+            });
+        }
+    } catch (e) {
+        res.status(500).json({
+            message:'erreur lors de l\'effacement de tous les routes',
+            error:e.message
+        });
+    }
+}
+
+
 const getRouteById  = async (req, res) =>{
     const id = req.params.id;
     try {
@@ -88,5 +124,7 @@ module.exports = {
     updateRoute:updateRoute,
     deleteRoute:deleteRoute,
     getAllRoute:getAllRoute,
-    getRouteById:getRouteById
+    getRouteById:getRouteById,
+    createRoutePls:createRoutePls,
+    deleteAllRoute:deleteAllRoute,
 }

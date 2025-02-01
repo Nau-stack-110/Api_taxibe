@@ -3,6 +3,7 @@ const taxibeController = require("../controllers/taxibe.controller");
 const { CheckToken, CheckAdmin } = require("../middlewares/authorize");
 const router = express.Router();
 router.post('/', [CheckToken, CheckAdmin], taxibeController.createTaxibe);
+router.post('/betsaka', [CheckToken, CheckAdmin], taxibeController.createTaxiBePls);
 router.delete('/:id', [CheckToken, CheckAdmin], taxibeController.deleteTaxiBeById);
 router.put('/:id', [CheckToken, CheckAdmin], taxibeController.updateTaxibe);
 

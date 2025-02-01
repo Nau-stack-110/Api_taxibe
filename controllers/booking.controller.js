@@ -89,7 +89,6 @@ const cancelBooking = async (req, res) =>{
     try { 
         const booking = await Bookings.findOne({
             where : {
-                // id:booking_id,
                 user_id:req.user.id,
             },
             include : [

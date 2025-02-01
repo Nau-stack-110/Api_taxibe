@@ -20,6 +20,19 @@ const createTaxibe = async (req, res) =>{
     }
 }
 
+const createTaxiBePls = async (req, res) =>{
+    const taxibeData= req.body;
+    try {
+        const taxibe = await TaxiBe.bulkCreate(taxibeData);
+        res.status(201).json(taxibe);
+    } catch (e) {
+        res.status(400).json({
+            message:'erreur lors de la création des taxibes',
+            error:e.message
+        });
+    }
+}
+
 const updateTaxibe = async (req, res) =>{
     const id = req.params.id;
     const updateTaxibe = {
@@ -104,6 +117,7 @@ const getTaxibeById = async (req, res) =>{
 
 module.exports = {
     createTaxibe:createTaxibe,
+    createTaxiBePls:createTaxiBePls,
     updateTaxibe:updateTaxibe,
     getAllTaxibe:getAllTaxibe,
     deleteTaxiBeById:deleteTaxiBeById,
