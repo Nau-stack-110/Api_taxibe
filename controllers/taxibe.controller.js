@@ -83,7 +83,11 @@ const getAllTaxibe = async (req, res) =>{
         const taxibe = await TaxiBe.findAll({ 
             include:{
                 model:Cooperative,
-                attributes:['name', 'contact', 'admin']
+                attributes:['name', 'contact', 'admin'],
+                include: {
+                    model: User,
+                    attributes: ["name", "email","tel"],
+                },
             }});
         res.status(200).json(taxibe);
     } catch (e) {
@@ -101,7 +105,6 @@ const getTaxibeById = async (req, res) =>{
             include:{
                 model:Cooperative,
                 attributes:['name', 'contact', 'admin'],
-            
                 include: {
                     model: User,
                     attributes: ["name", "email","tel"],
