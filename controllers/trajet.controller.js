@@ -1,15 +1,26 @@
-const { where } = require("sequelize");
 const {Trajet, TaxiBe, Route,} = require("../models");
 
 const createTrajet  = async (req, res) =>{
-    const { taxibe_id, route_id, date, place_dispo} = req.body;
+    const { taxibe_id, route_id, date } = req.body;
     try {
+        const taxi = await TaxiBe.findByPk(taxibe_id);
+        if (!taxi) {
+            return res.status(404).send({ message: 'Taxibe not found.' });
+        }
+        const total_places = taxi.nb_total_place;
+        const seats = Array.from({ length: total_places }, (_, i) => i + 1);
+        
+        const place_reserve = [];
+        const place_dispo = total_places;
+        
         const trajet = await Trajet.create({
             taxibe_id,
             route_id,
             date, 
-            place_dispo}
-        );
+            place_dispo,
+            seats,
+            place_reserve
+        });
         res.status(201).send(trajet);
     } catch (e) {
         res.status(400).send({
@@ -71,7 +82,7 @@ const getTrajetById  = async (req, res) =>{
                 attributes : ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id'],
             },
         ],
-        attributes: ['date', 'place_dispo'],}
+        attributes: ['date', 'place_dispo', 'seats', 'place_reserve'],}
         );
         if(!trajet){
             res.status(404).json({
@@ -100,7 +111,7 @@ const getAllTrajet  = async (req, res) =>{
                 attributes : ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id'],
             },
         ],
-        attributes: ['date', 'place_dispo'],}
+        attributes: ['date', 'place_dispo', 'seats', 'place_reserve'],}
         );
         res.status(200).send(trajet);
     } catch (e) {
@@ -111,45 +122,50 @@ const getAllTrajet  = async (req, res) =>{
     }
 }
 
-const getAvailableTaxi = async (req, res) =>{
-    const {date, route_id} = req.query;
+const getAvailableTaxi = async (req, res) => {
+    const { from, to, date } = req.query;
     try {
-        if (!date || !route_id) {
-            return res.status(400).send({error:"Veuillez fournir une date et un ID de route. "});
+        if (!from || !to || !date) {
+            return res.status(400).send({ 
+                error: "Veuillez fournir les params 'from', 'to' et 'date'." 
+            });
         }
-        const trajet = await Trajet.findAll(
-            { 
-            where: {
-                date, route_id,
-            },
-            include:[
+        const trajets = await Trajet.findAll({
+            where: { date },
+            include: [
                 {
-                    model:Route,
-                    attributes:['depart_city', 'arrival_city'],
+                    model: Route,
+                    attributes: ['depart_city', 'arrival_city'],
+                    where: { 
+                        depart_city: from, 
+                        arrival_city: to 
+                    }
                 },
                 {
-                    model:TaxiBe,
-                    attributes : ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id'],
-                },
-            ],
-            }
-        );
-        if (trajet.length === 0) {
-            return res.status(404).send({message:"Aucun TaxiBe disponible pour cette date et cette route."});
+                    model: TaxiBe,
+                    attributes: ['type', 'matricule', 'category', 'nb_total_place', 'cooperative_id']
+                }
+            ]
+        });
+
+        if (trajets.length === 0) {
+            return res.status(404).send({ 
+                message: "Aucun TaxiBe disponible pour cette date et cet itinéraire." 
+            });
         }
-        const taxibes = trajet.map((trajet) => ({
-            date:trajet.date,
-            route:trajet.route_id,
-            taxibe:trajet.taxibe_id
+        const availableTaxis = trajets.map(trajet => ({
+            date: trajet.date,
+            route: trajet.Route,
+            taxibe: trajet.TaxiBe
         }));
-        res.status(200).send(taxibes);
+        res.status(200).send(availableTaxis);
     } catch (e) {
         res.status(500).send({
-            message:'erreur lors de la recherche des taxiBes disponibles!', 
-            error:e.message
+            message: 'Erreur lors de la recherche des TaxiBes disponibles!',
+            error: e.message
         });
     }
-}
+};
 
 module.exports = {
     getAllTrajet,

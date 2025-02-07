@@ -1,50 +1,70 @@
 const { Bookings, Trajet, User, Route, TaxiBe, Cooperative } = require('../models');
 
-const createBooking = async (req, res) =>{
+const createBooking = async (req, res) => {
     const user_id = req.user.id;
-    const { trajet_id, nb_mpandeha } = req.body;
+    const { trajet_id, seat_researved } = req.body;
+   
+    // Calculer nb_mpandeha automatiquement à partir de la longueur de seat_researved
+    const nb_mpandeha = Array.isArray(seat_researved) ? seat_researved.length : 0;
+
     try {
+        if (!Array.isArray(seat_researved)) {
+            return res.status(400).send({
+                error: "seat_researved must be an array."
+            });
+        }
+        
         const trajet = await Trajet.findOne({
-            where: {id: trajet_id},
+            where: { id: trajet_id },
             include: {
                 model: TaxiBe,
                 attributes: ['nb_total_place'],
             },
         });
         if (!trajet) {
-            return res.status(404).send({error : "Trajet non trouvé! "});
+            return res.status(404).send({ error: "Trajet non trouvé!" });
         }
-        const {nb_total_place} = trajet.taxibe_id;
-        const place_dispo = trajet.place_dispo;
-        if (nb_mpandeha > nb_total_place){
+        
+        if (nb_mpandeha > trajet.place_dispo) {
             return res.status(400).send({
-                error : `"Nombre de place démandés (${nb_mpandeha} dépasse le total de places disponibles dans le taxibe (${nb_total_place})`,
+                error: `Nombre de places demandées (${nb_mpandeha}) dépasse le nombre de places disponibles (${trajet.place_dispo}).`
             });
         }
-        if (nb_mpandeha > place_dispo){
-            return res.status(400).send({
-                error : `"Nombre de place démandés (${nb_mpandeha} dépasse le total de places disponibles (${place_dispo})`,
-            });
+        
+        const validSeats = trajet.seats;
+        const reservedSeats = trajet.place_reserve || [];
+        
+        for (const seat of seat_researved) {
+            if (!validSeats.includes(seat)) {
+                return res.status(400).send({ error: `La place ${seat} n'est pas valide.` });
+            }
+            if (reservedSeats.includes(seat)) {
+                return res.status(400).send({ error: `La place ${seat} est déjà réservée.` });
+            }
         }
+        
         const booking = await Bookings.create({
             trajet_id,
-            user_id:user_id,
-            nb_mpandeha,
+            user_id,
+            seat_researved,
             date_booking: new Date(),
         });
-
-        trajet.place_dispo -= nb_mpandeha;
+    
+        trajet.place_reserve = reservedSeats.concat(seat_researved);
+        trajet.place_dispo = trajet.place_dispo - nb_mpandeha;
         await trajet.save();
+        
         res.status(201).send({
-            message:"Reservation effectuée avec succès", booking
+            message: "Réservation effectuée avec succès",
+            booking
         });
     } catch (e) {
         res.status(500).send({
-            message:"Internal Server Error!",
-            error:e.message
-        })
+            message: "Internal Server Error!",
+            error: e.message
+        });
     }
-}
+};
 
 const getAllBooking = async (req, res) =>{
     try {
@@ -85,35 +105,43 @@ const getAllBooking = async (req, res) =>{
     }
 }
 
-const cancelBooking = async (req, res) =>{
+const cancelBooking = async (req, res) => {
     try { 
         const booking = await Bookings.findOne({
-            where : {
-                user_id:req.user.id,
+            where: {
+                user_id: req.user.id,
             },
-            include : [
+            include: [
                 {
                     model: Trajet,
-                    attributes: ['id', 'place_dispo'],
+                    attributes: ['id', 'place_dispo', 'place_reserve'],
                 },
             ]
         });
         if (!booking) {
-            return res.status(404).send({message:"Reservation non trouvé !"});
+            return res.status(404).send({ message: "Réservation non trouvée!" });
         }
         const trajet = await Trajet.findByPk(booking.trajet_id);
+        if (!trajet) {
+            return res.status(404).send({ message: "Trajet non trouvé pour cette réservation!" });
+        }
+    
+        // Remove the booking's reserved seats from the trajet's current reserved seats
+        trajet.place_reserve = trajet.place_reserve.filter(
+            seat => !booking.seat_researved.includes(seat)
+        );
         trajet.place_dispo += booking.nb_mpandeha;
         await trajet.save();
-
+    
         await booking.destroy();
-        res.status(200).send({message: 'Reservation annulée avec succès!'});
+        res.status(200).send({ message: 'Réservation annulée avec succès!' });
     } catch (error) {
         res.status(500).send({
-            message:'erreur lors de l\'annulation d\'une reservation', 
-            error:error.message
+            message: 'Erreur lors de l\'annulation de la réservation',
+            error: error.message
         });
     }
-}
+};
 
 
 const getBookingById = async (req, res) =>{

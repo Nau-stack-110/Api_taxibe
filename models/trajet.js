@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Trajet.belongsTo(models.TaxiBe, {foreignKey:'taxibe_id'});
       Trajet.belongsTo(models.Route, {foreignKey:'route_id'});
+      Trajet.hasMany(models.Bookings, {foreignKey:'trajet_id'});
     }
   }
   Trajet.init({
@@ -15,6 +16,16 @@ module.exports = (sequelize, DataTypes) => {
     route_id: DataTypes.INTEGER,
     date: DataTypes.DATE,
     place_dispo: DataTypes.INTEGER,
+    seats: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: []
+    },
+    place_reserve: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: []
+    }
   }, {
     sequelize,
     modelName: 'Trajet',

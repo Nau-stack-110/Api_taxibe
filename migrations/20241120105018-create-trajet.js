@@ -11,31 +11,41 @@ module.exports = {
       },
       taxibe_id: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'TaxiBes',
-          key:'id',
+        allowNull: false,
+        references: {
+          model: 'TaxiBes',
+          key: 'id'
         },
-        onDelete:'CASCADE',
-        onUpdate:'CASCADE'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       route_id: {
         type: Sequelize.INTEGER,
-        allowNull:false,
-        references:{
-          model:'Routes',
-          key:'id',
+        allowNull: false,
+        references: {
+          model: 'Routes',
+          key: 'id'
         },
-        onDelete:'CASCADE',
-        onUpdate:'CASCADE'
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
       },
       date: {
         type: Sequelize.DATE,
-        allowNull:false
+        allowNull: false
       },
       place_dispo: {
         type: Sequelize.INTEGER,
-        allowNull:false,
+        allowNull: false,
+      },
+      seats: {
+        type: Sequelize.JSON,
+        allowNull: false,
+        defaultValue: []
+      },
+      place_reserve: {
+        type: Sequelize.JSON,
+        allowNull: false,
+        defaultValue: []
       },
       createdAt: {
         allowNull: false,
