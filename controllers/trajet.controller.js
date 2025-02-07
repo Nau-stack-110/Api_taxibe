@@ -1,17 +1,18 @@
 const {Trajet, TaxiBe, Route,} = require("../models");
+const { Op } = require("sequelize");
 
 const createTrajet  = async (req, res) =>{
     const { taxibe_id, route_id, date } = req.body;
     try {
-        const taxi = await TaxiBe.findByPk(taxibe_id);
-        if (!taxi) {
+        const taxibe = await TaxiBe.findByPk(taxibe_id);
+        if (!taxibe) {
             return res.status(404).send({ message: 'Taxibe not found.' });
         }
-        const total_places = taxi.nb_total_place;
+        const total_places = taxibe.nb_total_place;
         const seats = Array.from({ length: total_places }, (_, i) => i + 1);
         
-        const place_reserve = [];
-        const place_dispo = total_places;
+        const place_reserve = [1];
+        const place_dispo = total_places - 1;
         
         const trajet = await Trajet.create({
             taxibe_id,
@@ -130,8 +131,18 @@ const getAvailableTaxi = async (req, res) => {
                 error: "Veuillez fournir les params 'from', 'to' et 'date'." 
             });
         }
+        // Convertir la chaîne de caractère date (ex. "2025-02-08") en deux Date pour la plage de recherche
+        const startDate = new Date(date);
+        const endDate = new Date(date);
+        endDate.setDate(endDate.getDate() + 1);
+        
         const trajets = await Trajet.findAll({
-            where: { date },
+            where: { 
+                date: {
+                    [Op.gte]: startDate,
+                    [Op.lt]: endDate
+                }
+            },
             include: [
                 {
                     model: Route,
@@ -153,10 +164,11 @@ const getAvailableTaxi = async (req, res) => {
                 message: "Aucun TaxiBe disponible pour cette date et cet itinéraire." 
             });
         }
+
         const availableTaxis = trajets.map(trajet => ({
             date: trajet.date,
             route: trajet.Route,
-            taxibe: trajet.TaxiBe
+            taxi: trajet.TaxiBe
         }));
         res.status(200).send(availableTaxis);
     } catch (e) {
@@ -167,6 +179,55 @@ const getAvailableTaxi = async (req, res) => {
     }
 };
 
+const createTrajetPls = async (req, res) => {
+  const trajetsData = req.body; 
+  if (!Array.isArray(trajetsData)) {
+    return res.status(400).json({ message: "Le corps de la requête doit être un tableau de trajets." });
+  }
+  
+  try {
+    const preparedTrajets = await Promise.all(
+      trajetsData.map(async (traj) => {
+        const { taxibe_id, route_id, date } = traj;
+        
+        const taxibe = await TaxiBe.findByPk(taxibe_id);
+        if (!taxibe) {
+          throw new Error(`Taxibe with id ${taxibe_id} not found.`);
+        }
+        
+        const total_places = taxibe.nb_total_place;
+        const seats = Array.from({ length: total_places }, (_, i) => i + 1);
+
+        let reserved = traj.place_reserve ? [...traj.place_reserve] : [];
+        if (!reserved.includes(1)) {
+          reserved.unshift(1);
+        }
+        const place_reserve = reserved;
+        const place_dispo = (typeof traj.place_dispo !== "undefined") 
+                            ? traj.place_dispo 
+                            : total_places - place_reserve.length;
+        
+        return {
+          taxibe_id,
+          route_id,
+          date,
+          place_dispo,
+          seats,
+          place_reserve
+        };
+      })
+    );
+    
+    const trajetsCreated = await Trajet.bulkCreate(preparedTrajets, { returning: true });
+    return res.status(201).json(trajetsCreated);
+  } catch (err) {
+    return res.status(400).json({
+      message: "Erreur lors de la création en masse de trajets",
+      error: err.message
+    });
+  }
+};
+
 module.exports = {
     getAllTrajet,
     getTrajetById,
@@ -174,4 +235,5 @@ module.exports = {
     deleteTrajet,
     updateTrajet,
     getAvailableTaxi,
-}
+    createTrajetPls
+};
