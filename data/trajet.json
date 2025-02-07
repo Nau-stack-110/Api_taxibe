@@ -1,0 +1,82 @@
+[
+  {
+    "taxibe_id": 25,
+    "route_id": 1,
+    "date": "2025-02-11"
+  },
+  {
+    "taxibe_id": 40,
+    "route_id": 2,
+    "date": "2025-02-13"
+  },
+  {
+    "taxibe_id": 26,
+    "route_id": 2,
+    "date": "2025-02-14"
+  },
+  {
+    "taxibe_id": 27,
+    "route_id": 18,
+    "date": "2025-02-13"
+  },
+  {
+    "taxibe_id": 28,
+    "route_id": 19,
+    "date": "2025-09-10"
+  },
+  {
+    "taxibe_id": 29,
+    "route_id": 20,
+    "date": "2025-02-13"
+  },
+  {
+    "taxibe_id": 30,
+    "route_id": 21,
+    "date": "2025-02-10"
+  },
+  {
+    "taxibe_id": 31,
+    "route_id": 22,
+    "date": "2025-02-10"
+  },
+  {
+    "taxibe_id": 32,
+    "route_id": 23,
+    "date": "2025-02-09"
+  },
+  {
+    "taxibe_id": 33,
+    "route_id": 10,
+    "date": "2025-02-11"
+  },
+  {
+    "taxibe_id": 34,
+    "route_id": 8,
+    "date": "2025-02-11"
+  },
+  {
+    "taxibe_id": 35,
+    "route_id": 1,
+    "date": "2025-02-11"
+  },
+  {
+    "taxibe_id": 36,
+    "route_id": 2,
+    "date": "2025-02-14"
+  },
+  {
+    "taxibe_id": 37,
+    "route_id": 18,
+    "date": "2025-02-15"
+  },
+  {
+    "taxibe_id": 38,
+    "route_id": 19,
+    "date": "2025-02-15"
+  },
+  {
+    "taxibe_id": 39,
+    "route_id": 20,
+    "date": "2025-02-15"
+  }
+]
