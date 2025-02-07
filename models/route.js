@@ -5,7 +5,6 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Route extends Model {
     static associate(models) {
-      // Route.hasMany(models.Bookings, {foreignKey:'route_id'});
       Route.hasMany(models.Trajet, {foreignKey:'route_id'});
     }
   }

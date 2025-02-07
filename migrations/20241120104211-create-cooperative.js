@@ -24,16 +24,16 @@ module.exports = {
         allowNull:false
       },
       adresse: {
+        type: Sequelize.JSON,
+        allowNull:false
+      },
+      contact: {
         type: Sequelize.STRING,
         allowNull:false
       },
       bio: {
         type: Sequelize.STRING,
         allowNull:true
-      },
-      contact: {
-        type: Sequelize.INTEGER,
-        allowNull:false
       },
       link_web: {
         type: Sequelize.STRING,

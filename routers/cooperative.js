@@ -7,6 +7,8 @@ router.get('/', [CheckToken], cooperativeController.getAllCooperative );
 router.get('/:id',[CheckToken], cooperativeController.getcoopById );
 
 router.post('/', [CheckToken, CheckAdmin], cooperativeController.createCoop );
+router.post('/betsaka', [CheckToken, CheckAdmin], cooperativeController.createCoopPls );
+
 router.put('/:id', [CheckToken, CheckAdmin], cooperativeController.updateCoop );
 router.delete('/:id', [CheckToken, CheckAdmin], cooperativeController.deleteCoop );
 

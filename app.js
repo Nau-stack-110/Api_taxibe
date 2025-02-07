@@ -13,6 +13,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true,}));
 app.use(morgan('dev'));
 app.use(cors());
-app.use(mainRouter);
+app.use("/api", mainRouter);
 
 module.exports = app;

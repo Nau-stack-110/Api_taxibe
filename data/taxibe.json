@@ -1,0 +1,194 @@
+[
+  {
+    "type": "Sprinter CDI",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-1.jpg",
+    "matricule": "MAT-001",
+    "category": "Standard",
+    "nb_total_place": 22
+  },
+  {
+    "type": "Mazda",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-2.jpg",
+    "matricule": "MAT-002",
+    "category": "Standard",
+    "nb_total_place": 18
+  },
+  {
+    "type": "Sprinter",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-3.jpg",
+    "matricule": "MAT-003",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Crafter",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-4.jpg",
+    "matricule": "MAT-004",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Sprinter 206",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-5.jpg",
+    "matricule": "MAT-005",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Kaiamba",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-6.jpg",
+    "matricule": "MAT-006",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Crafer VOL XXX",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-7.jpg",
+    "matricule": "MAT-007",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Sprinter CDI",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-8.jpg",
+    "matricule": "MAT-008",
+    "category": "Standard",
+    "nb_total_place": 22
+  },
+  {
+    "type": "Mazda",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-9.jpg",
+    "matricule": "MAT-009",
+    "category": "Standard",
+    "nb_total_place": 18
+  },
+  {
+    "type": "Sprinter",
+    "cooperative_id": 1,
+    "imageTaxi": "taxi-10.jpg",
+    "matricule": "MAT-010",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Crafter",
+    "cooperative_id": 2,
+    "imageTaxi": "taxi-11.jpg",
+    "matricule": "MAT-011",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Sprinter 206",
+    "cooperative_id": 2,
+    "imageTaxi": "taxi-12.jpg",
+    "matricule": "MAT-012",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Sprinter CDI",
+    "cooperative_id": 2,
+    "imageTaxi": "taxi-13.jpg",
+    "matricule": "MAT-013",
+    "category": "Standard",
+    "nb_total_place": 22
+  },
+  {
+    "type": "Kaiamba",
+    "cooperative_id": 2,
+    "imageTaxi": "taxi-14.jpg",
+    "matricule": "MAT-014",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Crafer VOL XL",
+    "cooperative_id": 2,
+    "imageTaxi": "taxi-15.jpg",
+    "matricule": "MAT-015",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Mazda",
+    "cooperative_id": 3,
+    "imageTaxi": "taxi-16.jpg",
+    "matricule": "MAT-016",
+    "category": "Standard",
+    "nb_total_place": 18
+  },
+  {
+    "type": "Sprinter",
+    "cooperative_id": 3,
+    "imageTaxi": "taxi-17.jpg",
+    "matricule": "MAT-017",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Crafter",
+    "cooperative_id": 3,
+    "imageTaxi": "taxi-18.jpg",
+    "matricule": "MAT-018",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Sprinter CDI",
+    "cooperative_id": 4,
+    "imageTaxi": "taxi-19.jpg",
+    "matricule": "MAT-019",
+    "category": "Standard",
+    "nb_total_place": 22
+  },
+  {
+    "type": "Sprinter 206",
+    "cooperative_id": 4,
+    "imageTaxi": "taxi-20.jpg",
+    "matricule": "MAT-020",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Mazda",
+    "cooperative_id": 5,
+    "imageTaxi": "taxi-21.jpg",
+    "matricule": "MAT-021",
+    "category": "Standard",
+    "nb_total_place": 18
+  },
+  {
+    "type": "Kaiamba",
+    "cooperative_id": 5,
+    "imageTaxi": "taxi-22.jpg",
+    "matricule": "MAT-022",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Crafer VOL XXX",
+    "cooperative_id": 6,
+    "imageTaxi": "taxi-23.jpg",
+    "matricule": "MAT-023",
+    "category": "Standard",
+    "nb_total_place": 20
+  },
+  {
+    "type": "Sprinter",
+    "cooperative_id": 6,
+    "imageTaxi": "taxi-24.jpg",
+    "matricule": "MAT-024",
+    "category": "Standard",
+    "nb_total_place": 20
+  }
+]

@@ -135,15 +135,10 @@ const resetpassword = async (req, res) => {
     }
 };
 
-// const logout = async (res, req) =>{
-
-// }
-
 module.exports = {
     createAdmin,
     login, 
     register,
     resetpassword,
-    forgotpassword,
-    // logout,
+    forgotpassword
 }

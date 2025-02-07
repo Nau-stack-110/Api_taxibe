@@ -1,4 +1,4 @@
-const {TaxiBe, Cooperative} = require('../models');
+const {TaxiBe, Cooperative, User} = require('../models');
 
 const createTaxibe = async (req, res) =>{
     const cetaxibe = {
@@ -14,7 +14,7 @@ const createTaxibe = async (req, res) =>{
         res.status(201).json(taxibe);
     } catch (e) {
         res.status(400).json({
-            message:'erreur lors de la création d\'un taxi',
+            message:'erreur lors de la création d\'un taxibe',
             error:e.message
         });
     }
@@ -100,7 +100,14 @@ const getTaxibeById = async (req, res) =>{
         const taxibe = await TaxiBe.findByPk(id,{ 
             include:{
                 model:Cooperative,
-                attributes:['name', 'contact', 'admin']}});
+                attributes:['name', 'contact', 'admin'],
+            
+                include: {
+                    model: User,
+                    attributes: ["name", "email","tel"],
+                },
+            }
+            });
         if(!taxibe){
             res.status(404).json({
                 message:"Taxibe not found !"

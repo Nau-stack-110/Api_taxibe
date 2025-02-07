@@ -1,0 +1,135 @@
+[
+  {
+    "name": "Soa Trans",
+    "adresse": ["Antsirabe-Gare", "Antananarivo-Anosy", "Mahajanga-Center", "Toamasina-Station"],
+    "bio": "Opérative de transport regroupant plusieurs stations à Madagascar.",
+    "contact": "+261 33 40 625 92",
+    "link_web": "http://www.soa-trans.mg"
+  },
+  {
+    "name": "Fico Trans",
+    "adresse": ["Antsirabe-Ampihaviana", "Antananarivo-Central"],
+    "bio": "Coopérative spécialisée dans le transport entre Antsirabe et Antananarivo.",
+    "contact": "+261 33 40 625 93",
+    "link_web": "http://www.fico-trans.mg"
+  },
+  {
+    "name": "Cotram",
+    "adresse": ["Mahajanga-Station", "Antsirabe-Center"],
+    "bio": "Opérative couvrant les liaisons régionales à Madagascar.",
+    "contact": "+261 33 40 625 94",
+    "link_web": "http://www.cotram.mg"
+  },
+  {
+    "name": "Gasykar VIP",
+    "adresse": ["Antsiranana-Port", "Antsirabe-Hub", "Toliara-Airport"],
+    "bio": "Service VIP de transport proposant des trajets confortables.",
+    "contact": "+261 33 40 625 95",
+    "link_web": "http://www.gasykarvip.mg"
+  },
+  {
+    "name": "NyAntsika Trans",
+    "adresse": ["Mandoto-Ambary", "Antsirabe-Staion-Betafo"],
+    "bio": "Service VIP de transport proposant des trajets confortables entre Antsirabe, Mandoto et Morafeno.",
+    "contact": "+261 33 40 625 96",
+    "link_web": "http://www.gasykarvip.mg"
+  },
+  {
+    "name": "Manitra Plus",
+    "adresse": ["Antananarivo-Est", "Toamasina-Central", "Tsiroanimandidy-Station"],
+    "bio": "Coopérative innovante pour des services rapides et fiables.",
+    "contact": "+261 33 40 625 97",
+    "link_web": "http://www.manitraplus.mg"
+  },
+  {
+    "name": "Anjara Trans",
+    "adresse": ["Mahajanga-Port", "Antsirabe-Vatofotsy", "Antananarivo-Fasan'i Karana"],
+    "bio": "Opérative dynamique couvrant les principales villes littorales.",
+    "contact": "+261 33 40 625 98",
+    "link_web": "http://www.anjara-trans.mg"
+  },
+  {
+    "name": "Santatra Trans",
+    "adresse": ["Toliara-Center", "Antsirabe-Gare"],
+    "bio": "Coopérative réputée pour son service de transport interurbain.",
+    "contact": "+261 33 40 625 99",
+    "link_web": "http://www.santatra-trans.mg"
+  },
+  {
+    "name": "Express Mada",
+    "adresse": ["Fianarantsoa-Center", "Antananarivo-Fasan'i Karana"],
+    "bio": "Coopérative Express opérant dans tout Madagascar.",
+    "contact": "+261 33 40 626 00",
+    "link_web": "http://www.expressmada.mg"
+  },
+  {
+    "name": "RapidTrans Malagasy",
+    "adresse": ["Manakara-Station", "Toamasina-Port"],
+    "bio": "Service de transport rapide et fiable.",
+    "contact": "+261 33 40 626 01",
+    "link_web": "http://www.rapidtrans.mg"
+  },
+  {
+    "name": "Vola Trans",
+    "adresse": ["Mahajanga-Center", "Antsiranana-Gare"],
+    "bio": "Opérative de transport à prix compétitifs.",
+    "contact": "+261 33 40 626 02",
+    "link_web": "http://www.volatrans.mg"
+  },
+  {
+    "name": "Trans Mada",
+    "adresse": ["Toliara-Port", "Antananarivo-Airport"],
+    "bio": "Opérative avec un large réseau à Madagascar.",
+    "contact": "+261 33 40 626 03",
+    "link_web": "http://www.transmada.mg"
+  },
+  {
+    "name": "Saina Trans",
+    "adresse": ["Antananarivo-Central", "Manakara-Station"],
+    "bio": "Transports et services professionnels.",
+    "contact": "+261 33 40 626 04",
+    "link_web": "http://www.sainatrans.mg"
+  },
+  {
+    "name": "Fandriana Express",
+    "adresse": ["Toamasina-Market", "Mahajanga-Gare"],
+    "bio": "Express service pour tous vos trajets à Madagascar.",
+    "contact": "+261 33 40 626 05",
+    "link_web": "http://www.fandrianaexpress.mg"
+  },
+  {
+    "name": "Kabary Trans",
+    "adresse": ["Antsiranana-Court", "Toliara-Court"],
+    "bio": "Opérative dédiée au transport interrégional.",
+    "contact": "+261 33 40 626 06",
+    "link_web": "http://www.kabarytrans.mg"
+  },
+  {
+    "name": "Mada Voyages",
+    "adresse": ["Antananarivo-Fasan'i Karana", "Fianarantsoa-Station"],
+    "bio": "Voyages et transports sûrs pour toutes destinations.",
+    "contact": "+261 33 40 626 07",
+    "link_web": "http://www.madavoyages.mg"
+  },
+  {
+    "name": "Miara Trans",
+    "adresse": ["Toamasina-Station", "Antsiranana-Station"],
+    "bio": "Coopérative fière de desservir toutes les régions de Madagascar.",
+    "contact": "+261 33 40 626 08",
+    "link_web": "http://www.miara-trans.mg"
+  },
+  {
+    "name": "Marina Trans",
+    "adresse": ["Toliara-Gare", "Antananarivo-Midtown"],
+    "bio": "Opérative orientée service client et rapidité.",
+    "contact": "+261 33 40 626 09",
+    "link_web": "http://www.marinatrans.mg"
+  },
+  {
+    "name": "Hery Trans",
+    "adresse": ["Antananarivo-Downtown", "Toamasina-Dock"],
+    "bio": "Leader dans le secteur des transports à Madagascar.",
+    "contact": "+261 33 40 626 10",
+    "link_web": "http://www.herytrans.mg"
+  }
+]

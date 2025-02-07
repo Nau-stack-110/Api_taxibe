@@ -1,9 +1,9 @@
 # Lien du projet en production
 - (https://api-taxibe-mada.up.railway.app/)
 
-# API REST Réservation TaxiBe Coopérative à Madagascar
+# API REST Réservation des sièges dans un TaxiBe sur les Coopératives à Madagascar
 
-Une API REST permettant la gestion de réservations de taxi pour plusieurs coopératives de taxis à Madagascar. Ce projet utilise Node.js, Express, Sequelize-CLI, MySQL et d'autres technologies pour la gestion des réservations et la génération de PDF.
+Une API REST permettant la gestion de réservations des places dans un taxiBe pour plusieurs coopératives de taxis à Madagascar. Ce projet utilise Node.js, Express, Sequelize-CLI, MySQL et d'autres technologies pour la gestion des réservations et la génération de PDF.
 
 ## 🚀 Table des matières
 
@@ -27,7 +27,7 @@ Une API REST permettant la gestion de réservations de taxi pour plusieurs coop�
 ![MySQL](https://img.shields.io/badge/MySQL-v8.0.26-red)
 
 ## Routes et méthodes
-## table Cooperative et méthodes
+## Authentification et méthodes
 | Route                     | Méthode | Description                                      | Utilisateur  | Admin  |
 |---------------------------|---------|--------------------------------------------------|--------------|--------|  
 | `/auth/signup`                  | POST     | Créer un nouveau compte utilisateur                      | ✅            | ✅      |
@@ -141,7 +141,7 @@ Créer un fichier .env in the racine directory
 Add script below to the .env file
 ```m
 DB_USERNAME = **your database username (eg:root)**
-DB_PASSWORD = 
+DB_PASSWORD = **your database password **
 DB_DATABASE = **your database**
 DB_HOST = 127.0.0.1
 SECRET_KEY = **your secret**
@@ -172,5 +172,5 @@ npm run dev
 Server is running at :
 
 ```bash
-http://0.0.0.0/4000
+http://0.0.0.0/4000/api/
 ```

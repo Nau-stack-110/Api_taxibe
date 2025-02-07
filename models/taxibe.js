@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
   class TaxiBe extends Model {
 
     static associate(models) {
-      // TaxiBe.hasMany(models.Bookings, {foreignKey:'taxibe_id'});
       TaxiBe.hasMany(models.Trajet, {foreignKey:'taxibe_id'});
       TaxiBe.belongsTo(models.Cooperative, {foreignKey:'cooperative_id'});
     }

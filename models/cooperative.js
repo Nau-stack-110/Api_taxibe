@@ -12,9 +12,16 @@ module.exports = (sequelize, DataTypes) => {
   Cooperative.init({
     admin: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    adresse: DataTypes.STRING,
+    adresse: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      get() {
+        const rawValue = this.getDataValue('adresse');
+        return typeof rawValue === 'string' ? JSON.parse(rawValue) : rawValue;
+      },
+    },
     bio: DataTypes.STRING,
-    contact: DataTypes.INTEGER,
+    contact: DataTypes.STRING,
     link_web: DataTypes.STRING
   }, {
     sequelize,

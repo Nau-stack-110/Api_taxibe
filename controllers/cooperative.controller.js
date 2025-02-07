@@ -13,6 +13,19 @@ const createCoop  = async (req, res) =>{
     }
 }
 
+const createCoopPls  = async (req, res) =>{
+    const coopData = req.body;
+    try {
+        const coop = await Cooperative.bulkCreate(coopData);
+        res.status(201).json(coop);
+    } catch (e) {
+        res.status(400).json({
+            message:'erreur lors de la création des cooperatives',
+            error:e.message
+        });
+    }
+}
+
 const updateCoop  = async (req, res) =>{
     const id = req.params.id;
     const { name, adresse, bio, contact, link_web } = req.body;
@@ -101,5 +114,6 @@ module.exports = {
     getcoopById,
     deleteCoop,
     updateCoop,
-    createCoop
+    createCoop,
+    createCoopPls
 }
