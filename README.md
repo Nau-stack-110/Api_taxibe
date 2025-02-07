@@ -3,7 +3,7 @@
 
 # API REST Réservation TaxiBe Coopérative à Madagascar
 
-Une API REST permettant la gestion de réservations des places dans un taxiBe pour plusieurs coopératives de taxis à Madagascar. Ce projet utilise Node.js, Express, Sequelize-CLI, MySQL et d'autres technologies pour la gestion des réservations et la génération de PDF.
+Une API REST permettant la gestion de réservations des places dans un taxiBe pour plusieurs coopératives de taxibe à Madagascar. Ce projet utilise Node.js, Express, Sequelize-CLI, MySQL et d'autres technologies pour la gestion des réservations et la génération de PDF.
 
 ## 🚀 Table des matières
 
